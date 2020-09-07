@@ -1,6 +1,6 @@
-import {db} from '../firebaseConfig' // config setup your firebase
-import {CALENDAR_COLLECTION} from "../config/constants"; // collectiton name
-import firebase from "firebase/app";
+// import {db} from '../firebaseConfig' // config setup your firebase
+// import {CALENDAR_COLLECTION} from "../config/constants"; // collectiton name
+// import firebase from "firebase/app";
 
 const pushServerPublicKey = "your key";
 
@@ -61,10 +61,10 @@ function getUserSubscription() {
 }
 
 async function subscriptionToDb(sub, userId) {
-    const userRef = db.doc(`${CALENDAR_COLLECTION}/${userId}`)
-    await userRef.set({
-        subscriptions: firebase.firestore.FieldValue.arrayUnion(sub)
-    }, {merge: true})
+    // const userRef = db.doc(`${CALENDAR_COLLECTION}/${userId}`)
+    // await userRef.set({
+    //     subscriptions: firebase.firestore.FieldValue.arrayUnion(sub)
+    // }, {merge: true})
 }
 
 async function subscribeUserToPush(user) {

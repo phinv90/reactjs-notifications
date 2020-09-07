@@ -5,21 +5,20 @@ import {
     createNotificationSubscription,
     getUserSubscription,
     isPushNotificationSupported,
-    registerServiceWorker,
-    subscriptionToDb
+    registerServiceWorker
 } from "../notifications/push-notifications";
 
 const pushNotificationSupported = isPushNotificationSupported();
 
-export default function usePushNotifications(user) {
+export default function usePushNotifications() {
 
     useEffect(() => {
-        if (pushNotificationSupported && user.user_id) {
-            onRegisterPubSub(user)
+        if (pushNotificationSupported) {
+            onRegisterPubSub()
         }
-    }, [user]);
+    }, []);
 
-    const onRegisterPubSub = async (user) => {
+    const onRegisterPubSub = async () => {
         try {
             // đăng ký calendar service worker
             await registerServiceWorker()
@@ -32,7 +31,7 @@ export default function usePushNotifications(user) {
                 if (!subscription) {
                     subscription = await createNotificationSubscription()
                 }
-                await subscriptionToDb(JSON.parse(JSON.stringify(subscription)), user.user_id)
+                // await subscriptionToDb(JSON.parse(JSON.stringify(subscription)), user.user_id)
             }
 
         } catch (e) {
